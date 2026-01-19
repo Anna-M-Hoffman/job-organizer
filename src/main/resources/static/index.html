@@ -4,35 +4,50 @@
     <meta charset="UTF-8">
     <title>Job Offer Engine</title>
     <link rel="stylesheet" href="/css/style.css">
+    <title>Job Offer Decision Engine</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input, button { margin: 5px 0; padding: 5px; width: 300px; }
+        label { display: block; margin-top: 10px; }
+        .result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+    </style>
 </head>
 <body>
-<h1>Job Offer Decision Engine</h1>
+<h1>Job Offer Engine</h1>
+<label>Client ID (UUID):
+    <input type="text" id="clientId" placeholder="123e4567-e89b-12d3-a456-426614174000">
+</label>
 
-<form id="jobOfferForm">
-    <input type="text" id="jobTitle" placeholder="Job Title" required />
-    <input type="text" id="location" placeholder="Location" required />
-    <input type="number" id="offerSalary" placeholder="Salary" required />
-    <input type="number" id="salaryWeight" placeholder="Salary Weight (0-1)" step="0.01" value="0.5" required />
-    <input type="number" id="locationWeight" placeholder="Location Weight (0-1)" step="0.01" value="0.3" required />
-    <input type="number" id="growthWeight" placeholder="Growth Weight (0-1)" step="0.01" value="0.2" required />
-    <button type="submit">Submit Offer</button>
-</form>
+<label>Job Title:
+    <input type="text" id="jobTitle">
+</label>
 
-<h2>Your Offers</h2>
-<table id="offersTable" border="1">
-    <thead>
-    <tr>
-        <th>Job Title</th>
-        <th>Location</th>
-        <th>Salary</th>
-        <th>Score</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Offers will populate here -->
-    </tbody>
-</table>
+<label>Location:
+    <input type="text" id="location">
+</label>
 
-<script src="/js/app.js"></script>
+<label>Offer Salary:
+    <input type="number" id="offerSalary">
+</label>
+
+<label>Salary Weight (0–1):
+    <input type="number" step="0.01" id="salaryWeight">
+</label>
+
+<label>Growth Weight (0–1):
+    <input type="number" step="0.01" id="growthWeight">
+</label>
+
+<label>Location Weight (0–1):
+    <input type="number" step="0.01" id="locationWeight">
+</label>
+
+<button id="submitBtn">Submit Offer</button>
+<div class="result" id="result"></div>
+
+<button id="viewBtn">View All Offers</button>
+<div id="allOffers" class="result"></div>
+
+<script src="/app.js"></script>
 </body>
 </html>

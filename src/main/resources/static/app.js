@@ -1,56 +1,81 @@
-// Generate or get persistent client ID
-let clientId = localStorage.getItem("clientId");
-if (!clientId) {
-    clientId = crypto.randomUUID();
-    localStorage.setItem("clientId", clientId);
-}
+document.getElementById('submitBtn').addEventListener('click', function() {
+    const clientId = document.getElementById('clientId').value.trim();
+    const jobTitle = document.getElementById('jobTitle').value.trim();
+    const location = document.getElementById('location').value.trim();
+    const offerSalary = parseFloat(document.getElementById('offerSalary').value);
+    const salaryWeight = parseFloat(document.getElementById('salaryWeight').value);
+    const growthWeight = parseFloat(document.getElementById('growthWeight').value);
+    const locationWeight = parseFloat(document.getElementById('locationWeight').value);
 
-const form = document.getElementById("jobOfferForm");
-const tableBody = document.querySelector("#offersTable tbody");
-
-// Submit form via fetch
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const offer = {
-        jobTitle: document.getElementById("jobTitle").value,
-        location: document.getElementById("location").value,
-        offerSalary: parseFloat(document.getElementById("offerSalary").value),
-        salaryWeight: parseFloat(document.getElementById("salaryWeight").value),
-        locationWeight: parseFloat(document.getElementById("locationWeight").value),
-        growthWeight: parseFloat(document.getElementById("growthWeight").value)
+    // Build the request payload
+    const requestData = {
+        jobTitle,
+        location,
+        offerSalary,
+        salaryWeight,
+        growthWeight,
+        locationWeight
     };
 
-    const response = await fetch("/api/job-offers", {
-        method: "POST",
+    // Send POST request to Spring Boot API
+    fetch('/api/job-offers', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
-            "X-Client-Id": clientId
+            'Content-Type': 'application/json',
+            'X-Client-Id': clientId
         },
-        body: JSON.stringify(offer)
-    });
-
-    const savedOffer = await response.json();
-    addOfferToTable(savedOffer);
-    form.reset();
+        body: JSON.stringify(requestData)
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("Request failed: " + response.status);
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('result').innerHTML = `
+            <strong>Saved Job Offer:</strong><br>
+            ID: ${data.id}<br>
+            Client ID: ${data.clientId}<br>
+            Job Title: ${data.jobTitle}<br>
+            Location: ${data.location}<br>
+            Offer Salary: $${data.offerSalary.toLocaleString()}<br>
+            Normalized Salary: $${data.normalizedSalary.toFixed(2)}<br>
+            Score: ${data.score.toFixed(2)}
+        `;
+        })
+        .catch(err => {
+            document.getElementById('result').innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
+        });
 });
 
-// Fetch and display existing offers
-async function loadOffers() {
-    const response = await fetch("/api/job-offers", {
-        headers: { "X-Client-Id": clientId }
-    });
-    const offers = await response.json();
-    offers.forEach(addOfferToTable);
-}
+// View all offers for a client
+document.getElementById('viewBtn').addEventListener('click', function() {
+    const clientId = document.getElementById('clientId').value.trim();
+    if (!clientId) return alert("Please enter a valid Client ID (UUID).");
 
-function addOfferToTable(offer) {
-    const row = tableBody.insertRow();
-    row.insertCell(0).textContent = offer.jobTitle;
-    row.insertCell(1).textContent = offer.location;
-    row.insertCell(2).textContent = offer.offerSalary;
-    row.insertCell(3).textContent = offer.score.toFixed(2);
-}
+    fetch('/api/job-offers', {
+        method: 'GET',
+        headers: {
+            'X-Client-Id': clientId
+        }
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("Request failed: " + response.status);
+            return response.json();
+        })
+        .then(data => {
+            if (data.length === 0) {
+                document.getElementById('allOffers').innerHTML = "No offers found for this client.";
+                return;
+            }
 
-// Load offers on page load
-loadOffers();
+            let html = '<strong>All Job Offers:</strong><br><ul>';
+            data.forEach(offer => {
+                html += `<li>ID: ${offer.id}, Title: ${offer.jobTitle}, Location: ${offer.location}, Salary: $${offer.offerSalary.toLocaleString()}, Score: ${offer.score.toFixed(2)}</li>`;
+            });
+            html += '</ul>';
+            document.getElementById('allOffers').innerHTML = html;
+        })
+        .catch(err => {
+            document.getElementById('allOffers').innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
+        });
+});
