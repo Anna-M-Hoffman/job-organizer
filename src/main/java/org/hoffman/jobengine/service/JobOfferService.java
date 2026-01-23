@@ -23,12 +23,11 @@ public class JobOfferService {
 
     public JobOffer createOffer(UUID clientId, JobOfferRequest request) {
 
-        double inflation = externalDataService.getInflationMultiplier();
         double costOfLiving = externalDataService.getCostOfLivingIndex(request.getLocation());
         double growth = externalDataService.getCareerGrowthScore(request.getJobTitle());
 
-        double adjustedSalary = request.getOfferSalary() * inflation;
-        double normalizedSalary = adjustedSalary / costOfLiving;
+        double salary = request.getOfferSalary();
+        double normalizedSalary = salary / costOfLiving;
 
         double score =
                 normalizedSalary * request.getSalaryWeight()

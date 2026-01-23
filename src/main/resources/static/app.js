@@ -1,6 +1,7 @@
 document.getElementById('submitBtn').addEventListener('click', function() {
     const clientId = document.getElementById('clientId').value.trim();
     const jobTitle = document.getElementById('jobTitle').value.trim();
+    const country = document.getElementById('country').value.trim();
     const location = document.getElementById('location').value.trim();
     const offerSalary = parseFloat(document.getElementById('offerSalary').value);
     const salaryWeight = parseFloat(document.getElementById('salaryWeight').value);

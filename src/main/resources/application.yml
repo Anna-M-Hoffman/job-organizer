@@ -8,3 +8,9 @@ spring:
       ddl-auto: update   # automatically creates tables from your entities
     show-sql: true       # prints SQL queries in console
     database-platform: org.hibernate.dialect.MySQLDialect
+
+
+api:
+  ninjas:
+    key: 7peHYK5KBLPpPDlqwKx66vipPHZyTQkIdtbcU9y5
+

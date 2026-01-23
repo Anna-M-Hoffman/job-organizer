@@ -7,6 +7,7 @@ import lombok.Data;
 public class JobOfferRequest {
 
     private String jobTitle;
+    private String country;
     private String location;
     private double offerSalary;
 
@@ -14,5 +15,5 @@ public class JobOfferRequest {
     private double locationWeight;
     private double growthWeight;
 
-    // getters & setters
+    // getters & setters automatically generated with lombok
 }
