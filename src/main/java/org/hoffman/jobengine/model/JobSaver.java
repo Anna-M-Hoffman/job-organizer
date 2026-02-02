@@ -1,6 +1,5 @@
 package org.hoffman.jobengine.model;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,11 @@ import jakarta.persistence.*;
 // What gets persisted
 
 @Entity
-@Table(name = "job_offers")
+@Table(name = "jobs_saved")
 @Data                 // generates getters, setters, toString, equals, hashCode
 @NoArgsConstructor     // generates no-arg constructor
 @AllArgsConstructor    // generates all-arg constructor
-public class JobOffer {
+public class JobSaver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,9 @@ public class JobOffer {
     private UUID clientId; // store the client identifier
     private String jobTitle;
     private String location;
-    private double offerSalary;
-    private double normalizedSalary; // calculated field
+    private String company;
+    private double salary;
+    private double desiredSalary;
+    private String status;
     private double score; // calculated field
 }

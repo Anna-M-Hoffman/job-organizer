@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Job Offer Engine</title>
+    <title>Job Organizer</title>
     <link rel="stylesheet" href="/css/style.css">
-    <title>Job Offer Decision Engine</title>
+    <title>Job Organizer</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
         input, button { margin: 5px 0; padding: 5px; width: 300px; }
@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-<h1>Job Offer Engine</h1>
+<h1>Job Organizer</h1>
 <label>Client ID (UUID):
     <input type="text" id="clientId" placeholder="123e4567-e89b-12d3-a456-426614174000">
 </label>
@@ -26,27 +26,27 @@
     <input type="text" id="location">
 </label>
 
-<label>Offer Salary:
-    <input type="number" id="offerSalary">
+<label>Company:
+    <input type="text" id="company">
 </label>
 
-<label>Salary Weight (0–1):
-    <input type="number" step="0.01" id="salaryWeight">
+<label>Job Salary:
+    <input type="number" id="salary">
 </label>
 
-<label>Growth Weight (0–1):
-    <input type="number" step="0.01" id="growthWeight">
+<label>Desired Salary:
+    <input type="number" id="desiredSalary">
 </label>
 
-<label>Location Weight (0–1):
-    <input type="number" step="0.01" id="locationWeight">
+<label>Salary:
+    <input type="text" id="status">
 </label>
 
-<button id="submitBtn">Submit Offer</button>
+<button id="submitBtn">Submit Job</button>
 <div class="result" id="result"></div>
 
-<button id="viewBtn">View All Offers</button>
-<div id="allOffers" class="result"></div>
+<button id="viewBtn">View All Jobs</button>
+<div id="allJobs" class="result"></div>
 
 <script src="/app.js"></script>
 </body>

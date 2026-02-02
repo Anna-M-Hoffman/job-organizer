@@ -1,25 +1,24 @@
 document.getElementById('submitBtn').addEventListener('click', function() {
     const clientId = document.getElementById('clientId').value.trim();
     const jobTitle = document.getElementById('jobTitle').value.trim();
-    const country = document.getElementById('country').value.trim();
     const location = document.getElementById('location').value.trim();
-    const offerSalary = parseFloat(document.getElementById('offerSalary').value);
-    const salaryWeight = parseFloat(document.getElementById('salaryWeight').value);
-    const growthWeight = parseFloat(document.getElementById('growthWeight').value);
-    const locationWeight = parseFloat(document.getElementById('locationWeight').value);
+    const company = document.getElementById('company').value.trim();
+    const salary = parseFloat(document.getElementById('salary').value);
+    const desiredSalary = parseFloat(document.getElementById('desiredSalary').value);
+    const status = document.getElementById('status').value.trim();
 
     // Build the request payload
     const requestData = {
         jobTitle,
         location,
-        offerSalary,
-        salaryWeight,
-        growthWeight,
-        locationWeight
+        company,
+        salary,
+        desiredSalary,
+        status
     };
 
     // Send POST request to Spring Boot API
-    fetch('/api/job-offers', {
+    fetch('/api/jobs_saved', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -33,14 +32,15 @@ document.getElementById('submitBtn').addEventListener('click', function() {
         })
         .then(data => {
             document.getElementById('result').innerHTML = `
-            <strong>Saved Job Offer:</strong><br>
+            <strong>Saved Jobs:</strong><br>
             ID: ${data.id}<br>
             Client ID: ${data.clientId}<br>
             Job Title: ${data.jobTitle}<br>
             Location: ${data.location}<br>
-            Offer Salary: $${data.offerSalary.toLocaleString()}<br>
-            Normalized Salary: $${data.normalizedSalary.toFixed(2)}<br>
-            Score: ${data.score.toFixed(2)}
+            Job Salary: $${data.salary.toLocaleString()}<br>
+            Desired Salary: $${data.desiredSalary.toLocaleString()}<br>
+            Status: ${data.status}<br>
+            Salary Score: ${data.score.toFixed(2)}
         `;
         })
         .catch(err => {
@@ -53,7 +53,7 @@ document.getElementById('viewBtn').addEventListener('click', function() {
     const clientId = document.getElementById('clientId').value.trim();
     if (!clientId) return alert("Please enter a valid Client ID (UUID).");
 
-    fetch('/api/job-offers', {
+    fetch('/api/jobs_saved', {
         method: 'GET',
         headers: {
             'X-Client-Id': clientId
@@ -69,9 +69,9 @@ document.getElementById('viewBtn').addEventListener('click', function() {
                 return;
             }
 
-            let html = '<strong>All Job Offers:</strong><br><ul>';
+            let html = '<strong>All Jobs:</strong><br><ul>';
             data.forEach(offer => {
-                html += `<li>ID: ${offer.id}, Title: ${offer.jobTitle}, Location: ${offer.location}, Salary: $${offer.offerSalary.toLocaleString()}, Score: ${offer.score.toFixed(2)}</li>`;
+                html += `<li>ID: ${offer.id}, Title: ${offer.jobTitle}, Location: ${offer.location}, Company: ${offer.company}, Salary: $${offer.salary.toLocaleString()}, Salary Score: ${offer.score.toFixed(2)}</li>`;
             });
             html += '</ul>';
             document.getElementById('allOffers').innerHTML = html;

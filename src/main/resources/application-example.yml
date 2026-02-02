@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/joboffers
+    url: jdbc:mysql://localhost:3306/jobs_saved
     username: YOUR_USERNAME
     password: YOUR_PASSWORD
 

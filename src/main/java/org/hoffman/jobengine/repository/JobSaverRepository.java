@@ -1,14 +1,14 @@
 package org.hoffman.jobengine.repository;
 
-import org.hoffman.jobengine.model.JobOffer;
+import org.hoffman.jobengine.model.JobSaver;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.UUID;
 
 // Standard Spring Data JPA (Java persistence connects to databases)
-public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
+public interface JobSaverRepository extends JpaRepository<JobSaver, Long> {
 
-    List<JobOffer> findByClientId(UUID clientId);
+    List<JobSaver> findByClientId(UUID clientId);
 }
 
