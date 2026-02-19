@@ -19,19 +19,21 @@ public class JobSaverController {
         this.service = service;
     }
 
+
+    @GetMapping
+    public List<JobSaver> getOffers(
+            @RequestParam UUID clientId) {
+
+        return service.getJob(clientId);
+    }
+
+
     @PostMapping
     public JobSaver createOffer(
             @RequestHeader("X-Client-Id") UUID clientId,
             @RequestBody JobSaverRequest request) {
 
         return service.createJob(clientId, request);
-    }
-
-    @GetMapping
-    public List<JobSaver> getOffers(
-            @RequestHeader("X-Client-Id") UUID clientId) {
-
-        return service.getJob(clientId);
     }
 }
 

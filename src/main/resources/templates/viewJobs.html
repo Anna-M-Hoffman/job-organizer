@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Jobs</title>
+</head>
+<body>
+<h1>Your Saved Jobs</h1>
+<ul>
+  <li th:each="job : ${jobs}">
+    <strong th:text="${job.jobTitle}">Job Title</strong><br>
+    Location: <span th:text="${job.location}">Location</span><br>
+    Company: <span th:text="${job.company}">Company</span><br>
+    Salary: $<span th:text="${job.salary}">Salary</span><br>
+    Desired Salary: $<span th:text="${job.desiredSalary}">Desired</span><br>
+    Status: <span th:text="${job.status}">Status</span><br>
+    Match: <span th:text="${T(java.lang.Math).round(job.score * 100)}">Score</span>%
+  </li>
+</ul>
+</body>
+</html>

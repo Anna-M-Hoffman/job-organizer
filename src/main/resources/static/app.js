@@ -72,21 +72,26 @@ document.getElementById('submitBtn').addEventListener('click', function() {
         });
 });
 
-// View all offers for a client
+// View all jobs for a client
 document.getElementById('viewBtn').addEventListener('click', function() {
-    fetch('/api/jobs', {
-        method: 'GET',
-        headers: {
-            'X-Client-Id': clientId  // <-- use the same cookie
-        }
-    })
+
+    const clientId = getCookie("clientId");
+    console.log("Client ID from cookie:", clientId); // <-- debug log
+
+    if (!clientId) {
+        document.getElementById('allJobs').innerHTML =
+            "<span style='color:red;'>No client ID found.</span>";
+        return;
+    }
+
+    fetch(`/api/jobs?clientId=${clientId}`) // Get the cookie
         .then(response => {
             if (!response.ok) throw new Error("Request failed: " + response.status);
             return response.json();
         })
         .then(data => {
             if (!data.length) {
-                document.getElementById('allOffers').innerHTML = "No jobs found.";
+                document.getElementById('allJobs').innerHTML = "No jobs found.";
                 return;
             }
 
@@ -106,10 +111,11 @@ document.getElementById('viewBtn').addEventListener('click', function() {
             });
             html += '</ul>';
 
-            document.getElementById('allOffers').innerHTML = html;
+            document.getElementById('allJobs').innerHTML = html;
         })
         .catch(err => {
-            document.getElementById('allOffers').innerHTML =
+            document.getElementById('allJobs').innerHTML =
                 `<span style="color:red;">${err.message}</span>`;
         });
 });
+
