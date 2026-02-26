@@ -20,6 +20,40 @@ button {
     width: 300px;
 }
 
+.job-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 per row */
+    gap: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 8px;
+    font-size: 14px;
+}
+
+.form-button {
+    grid-column: span 2; /* button spans full width */
+    text-align: center;
+}
+
+.form-button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 button {
     cursor: pointer;
 }
@@ -72,4 +106,14 @@ button {
 th i, td i {
     margin-right: 8px;
     vertical-align: middle;  /* ensures the icon is vertically aligned with text */
+}
+
+@media (max-width: 600px) {
+    .job-form {
+        grid-template-columns: 1fr; /* stack on mobile */
+    }
+
+    .form-button {
+        grid-column: span 1;
+    }
 }

@@ -45,7 +45,11 @@ if (!clientId) {
 
 
 
-document.getElementById('submitBtn').addEventListener('click', function() {
+// document.getElementById('submitBtn').addEventListener('click', function() {
+document.getElementById("jobForm").addEventListener("submit", function(e) {
+    e.preventDefault();  // prevents page refresh
+
+    // POST logic here
     const jobTitle = document.getElementById('jobTitle').value.trim();
     const location = document.getElementById('location').value.trim();
     const company = document.getElementById('company').value.trim();
@@ -80,7 +84,6 @@ document.getElementById('submitBtn').addEventListener('click', function() {
     if (status) requestData.status = status;
 
 
-    // Send POST request to Spring Boot API
     fetch('/api/jobs', {
         method: 'POST',
         headers: {
@@ -89,29 +92,38 @@ document.getElementById('submitBtn').addEventListener('click', function() {
         },
         body: JSON.stringify(requestData)
     })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error(text);
+                });
+            }
+            return response.json();
+        })
         .then(data => {
-            const resultDiv = document.getElementById('result');
 
             resultDiv.innerHTML = `
-        <span class="success-message">
-            Job successfully submitted!
-        </span>
-    `;
+            <span class="success-message">
+                Job successfully submitted!
+            </span>
+        `;
 
-            // Optional: clear form fields after success
+            // Clear form
             document.getElementById('jobTitle').value = "";
             document.getElementById('location').value = "";
             document.getElementById('company').value = "";
             document.getElementById('salary').value = "";
             document.getElementById('desiredSalary').value = "";
             document.getElementById('status').value = "PENDING";
+
+            loadJobs(); // refresh table
         })
         .catch(err => {
-            document.getElementById('result').innerHTML = `
-        <span class="error-message">
-            Submission failed. ${err.message}
-        </span>
-    `;
+            resultDiv.innerHTML = `
+            <span class="error-message">
+                Submission failed. ${err.message}
+            </span>
+        `;
         });
 });
 
@@ -170,7 +182,7 @@ function loadJobs() {
                         <td>${job.score != null ? `${Math.round(job.score * 100)}%` : 'N/A'}</td>
                         <td>${job.status ?? 'N/A'}</td>
                         <td>
-                            <button class="delete-btn" onclick="deleteJob(${job.id})">
+                            <button class="delete-btn" onclick="deleteJob(${job.id}, this)">
                                 Delete
                             </button>
                         </td>
