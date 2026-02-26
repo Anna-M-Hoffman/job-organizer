@@ -146,14 +146,14 @@ document.getElementById('viewBtn').addEventListener('click', function() {
                 <table border="1" id="jobTable">
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th>Company</th>
-                            <th>Location</th>
-                            <th>Salary</th>
-                            <th>Desired</th>
-                            <th>Status</th>
-                            <th>Match</th>
-                            <th>Action</th>
+                            <th><i class="fa-solid fa-circle-user"></i>Title</th>
+                            <th><i class="fa-solid fa-users"></i>Company</th>
+                            <th><i class="fa-solid fa-city"></i>Location</th>
+                            <th><i class="fa-solid fa-money-bill"></i>Salary</th>
+                            <th><i class="fa-solid fa-dollar-sign"></i>Desired</th>
+                            <th><i class="fa-solid fa-sliders"></i>Salary Score</th>
+                            <th><i class="fa-solid fa-gears"></i>Status</th>
+                            <th><i class="fa-solid fa-circle-xmark"></i>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,8 +167,8 @@ document.getElementById('viewBtn').addEventListener('click', function() {
                         <td>${job.location ?? 'N/A'}</td>
                         <td>${job.salary != null ? `$${job.salary.toLocaleString()}` : 'N/A'}</td>
                         <td>${job.desiredSalary != null ? `$${job.desiredSalary.toLocaleString()}` : 'N/A'}</td>
-                        <td>${job.status ?? 'N/A'}</td>
                         <td>${job.score != null ? `${Math.round(job.score * 100)}%` : 'N/A'}</td>
+                        <td>${job.status ?? 'N/A'}</td>
                         <td>
                             <button class="delete-btn" onclick="deleteJob(${job.id}, this)">
                                 Delete

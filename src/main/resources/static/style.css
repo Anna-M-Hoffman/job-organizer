@@ -61,3 +61,15 @@ button {
     color: lightcoral;
     font-weight: bold;
 }
+
+/* Icon alignment */
+.icon-text {
+    display: flex;
+    align-items: center;   /* vertical alignment */
+    gap: 14px;              /* spacing between icon and text */
+}
+/* Table row icon alignment */
+th i, td i {
+    margin-right: 8px;
+    vertical-align: middle;  /* ensures the icon is vertically aligned with text */
+}

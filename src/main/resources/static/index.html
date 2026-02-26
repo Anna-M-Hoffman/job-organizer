@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/all.min.css">
     <title>Job Organizer</title>
 </head>
 <body>
-<h1>Job Organizer</h1>
+<div class="icon-text">
+    <i class="fa-solid fa-briefcase fa-2x"></i>
+    <h1>Job Organizer</h1>
+</div>
 
 <label>Job Title:
     <input type="text" id="jobTitle">
@@ -44,14 +48,14 @@
 <table id="allJobs" class="result">
     <thead>
     <tr>
-        <th>Title</th>
-        <th>Company</th>
-        <th>Location</th>
-        <th>Salary</th>
-        <th>Desired</th>
-        <th>Status</th>
-        <th>Match</th>
-        <th>Action</th>
+        <th><i class="fa-solid fa-circle-user"></i>Title</th>
+        <th><i class="fa-solid fa-users"></i>Company</th>
+        <th><i class="fa-solid fa-city"></i>Location</th>
+        <th><i class="fa-solid fa-money-bill"></i>Salary</th>
+        <th><i class="fa-solid fa-dollar-sign"></i>Desired</th>
+        <th><i class="fa-solid fa-sliders"></i>Salary Score</th>
+        <th><i class="fa-solid fa-gears"></i>Status</th>
+        <th><i class="fa-solid fa-circle-xmark"></i>Delete</th>
     </tr>
     </thead>
     <tbody></tbody>
