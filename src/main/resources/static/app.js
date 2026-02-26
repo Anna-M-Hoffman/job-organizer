@@ -115,11 +115,10 @@ document.getElementById('submitBtn').addEventListener('click', function() {
         });
 });
 
-// View all jobs for a client
-document.getElementById('viewBtn').addEventListener('click', function() {
+
+function loadJobs() {
 
     const clientId = getCookie("clientId");
-    console.log("Client ID from cookie:", clientId); // <-- debug log
 
     if (!clientId) {
         document.getElementById('allJobs').innerHTML =
@@ -133,15 +132,16 @@ document.getElementById('viewBtn').addEventListener('click', function() {
                 return response.text().then(text => {
                     throw new Error(text);
                 });
-            }            return response.json();
+            }
+            return response.json();
         })
         .then(data => {
+
             if (!data.length) {
                 document.getElementById('allJobs').innerHTML = "No jobs found.";
                 return;
             }
 
-            // Create table structure
             let html = `
                 <table border="1" id="jobTable">
                     <thead>
@@ -170,7 +170,7 @@ document.getElementById('viewBtn').addEventListener('click', function() {
                         <td>${job.score != null ? `${Math.round(job.score * 100)}%` : 'N/A'}</td>
                         <td>${job.status ?? 'N/A'}</td>
                         <td>
-                            <button class="delete-btn" onclick="deleteJob(${job.id}, this)">
+                            <button class="delete-btn" onclick="deleteJob(${job.id})">
                                 Delete
                             </button>
                         </td>
@@ -184,9 +184,15 @@ document.getElementById('viewBtn').addEventListener('click', function() {
             `;
 
             document.getElementById('allJobs').innerHTML = html;
+
         })
         .catch(err => {
             document.getElementById('allJobs').innerHTML =
                 `<span style="color:red;">${err.message}</span>`;
         });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadJobs();
 });
+
