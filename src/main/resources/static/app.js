@@ -13,6 +13,13 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
+// Function to turn enum into Title Case
+function formatStatus(status) {
+    if (!status) return "N/A";          // if null or undefined
+    return status.charAt(0).toUpperCase() +
+        status.slice(1).toLowerCase();
+}
+
 // --------------Function to delete jobs -----------
 function deleteJob(id, button) {
 
@@ -102,12 +109,6 @@ document.getElementById("jobForm").addEventListener("submit", function(e) {
         })
         .then(data => {
 
-            resultDiv.innerHTML = `
-            <span class="success-message">
-                Job successfully submitted!
-            </span>
-        `;
-
             // Clear form
             document.getElementById('jobTitle').value = "";
             document.getElementById('location').value = "";
@@ -180,7 +181,7 @@ function loadJobs() {
                         <td>${job.salary != null ? `$${job.salary.toLocaleString()}` : 'N/A'}</td>
                         <td>${job.desiredSalary != null ? `$${job.desiredSalary.toLocaleString()}` : 'N/A'}</td>
                         <td>${job.score != null ? `${Math.round(job.score * 100)}%` : 'N/A'}</td>
-                        <td>${job.status ?? 'N/A'}</td>
+                        <td>${formatStatus(job.status)}</td>
                         <td>
                             <button class="delete-btn" onclick="deleteJob(${job.id}, this)">
                                 Delete

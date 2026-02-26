@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
+    background-color: blanchedalmond;
 }
 
 h1 {
@@ -9,7 +10,7 @@ h1 {
 
 label {
     display: block;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 input,
@@ -20,12 +21,33 @@ button {
     width: 300px;
 }
 
+.icon-text {
+    display: flex;
+    justify-content: center;  /* centers items horizontally */
+    align-items: center;      /* centers items vertically */
+    width: 100%;
+    background-color: #68b6a5;
+    gap: 10px;                /* space between icon and text */
+    box-sizing: border-box;
+    color: white;
+}
+
 .job-form {
     display: grid;
     grid-template-columns: 1fr 1fr; /* 2 per row */
     gap: 20px;
+    /*width: 100%;*/
     max-width: 800px;
     margin: 20px auto;
+    background-color: #f1957a;
+}
+
+/* Full-width form container */
+.form-container {
+    width: 100%;
+    background-color: #f1957a; /* your existing form color */
+    padding: 1px;             /* space inside container */
+    box-sizing: border-box;
 }
 
 .form-group {
@@ -52,6 +74,7 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    background-color: #68b6a5;
 }
 
 button {
@@ -78,7 +101,11 @@ button {
 }
 
 #allJobs th {
-    background-color: #f2f2f2;
+    background-color: #68b6a5;
+}
+
+#allJobs td {
+    background-color: #ffffff;
 }
 
 .delete-btn {
@@ -86,13 +113,9 @@ button {
     width: auto;
 }
 
-.success-message {
-    color: lightgreen;
-    font-weight: bold;
-}
 
 .error-message {
-    color: lightcoral;
+    color: #ff0000;
     font-weight: bold;
 }
 
@@ -108,7 +131,8 @@ th i, td i {
     vertical-align: middle;  /* ensures the icon is vertically aligned with text */
 }
 
-@media (max-width: 600px) {
+/* Form is vertical on phones */
+@media (max-width: 800px) {
     .job-form {
         grid-template-columns: 1fr; /* stack on mobile */
     }
