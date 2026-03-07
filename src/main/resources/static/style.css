@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: blanchedalmond;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 5px;
+}
+
+input,
+select,
+button {
+    margin-top: 5px;
+    padding: 6px;
+    width: 300px;
+}
+
+.icon-text {
+    display: flex;
+    justify-content: center;  /* centers items horizontally */
+    align-items: center;      /* centers items vertically */
+    width: 100%;
+    background-color: #68b6a5;
+    gap: 10px;                /* space between icon and text */
+    box-sizing: border-box;
+    color: white;
+}
+
+.job-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 per row */
+    gap: 20px;
+    /*width: 100%;*/
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #f1957a;
+}
+
+/* Full-width form container */
+.form-container {
+    width: 100%;
+    background-color: #f1957a; /* your existing form color */
+    padding: 1px;             /* space inside container */
+    box-sizing: border-box;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    padding: 8px;
+    font-size: 14px;
+}
+
+.form-button {
+    grid-column: span 2; /* button spans full width */
+    text-align: center;
+}
+
+.form-button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #68b6a5;
+}
+
+button {
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#allJobs {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#allJobs th,
+#allJobs td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+#allJobs th {
+    background-color: #68b6a5;
+}
+
+#allJobs td {
+    background-color: #ffffff;
+}
+
+.delete-btn {
+    padding: 4px 8px;
+    width: auto;
+}
+
+
+.error-message {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* Icon alignment */
+.icon-text {
+    display: flex;
+    align-items: center;   /* vertical alignment */
+    gap: 14px;              /* spacing between icon and text */
+}
+/* Table row icon alignment */
+th i, td i {
+    margin-right: 8px;
+    vertical-align: middle;  /* ensures the icon is vertically aligned with text */
+}
+
+/* Form is vertical on phones */
+@media (max-width: 800px) {
+    .job-form {
+        grid-template-columns: 1fr; /* stack on mobile */
+    }
+
+    .form-button {
+        grid-column: span 1;
+    }
+}
