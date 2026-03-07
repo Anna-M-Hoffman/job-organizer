@@ -27,15 +27,17 @@ public class JobSaver {
     @JdbcTypeCode(SqlTypes.CHAR)  // store as CHAR(36) instead of BLOB
     private UUID clientId; // store the client identifier
 
+    @Column(nullable = false)
     private String jobTitle;
+
     private String location;
     private String company;
-    private double salary;
-    private double desiredSalary;
-    private double score; // calculated field
+    private Double salary;
+    private Double desiredSalary;
+    @Column(nullable = true)
+    private Double score; // calculated field
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private JobStatus status;
 
 }
