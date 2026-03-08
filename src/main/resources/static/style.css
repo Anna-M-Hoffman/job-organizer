@@ -1,7 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: blanchedalmond;
+    /*background-color: blanchedalmond;*/
+    background-color: chartreuse;
 }
 
 h1 {
@@ -26,7 +27,7 @@ button {
     justify-content: center;  /* centers items horizontally */
     align-items: center;      /* centers items vertically */
     width: 100%;
-    background-color: #68b6a5;
+    background-color: #498071;
     gap: 10px;                /* space between icon and text */
     box-sizing: border-box;
     color: white;
@@ -77,10 +78,9 @@ button {
     background-color: #68b6a5;
 }
 
-#submitBtn:hover {
-    background-color: rgb(162, 246, 234);
+.form-button button:hover {
+    background-color: #80E8CA;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 button {
