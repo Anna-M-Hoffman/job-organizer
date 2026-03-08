@@ -77,6 +77,12 @@ button {
     background-color: #68b6a5;
 }
 
+#submitBtn:hover {
+    background-color: rgb(162, 246, 234);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 button {
     cursor: pointer;
 }

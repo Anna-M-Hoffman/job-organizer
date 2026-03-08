@@ -75,20 +75,15 @@ document.getElementById("jobForm").addEventListener("submit", function(e) {
         return;
     }
 
-    if (!status) {
-        resultDiv.innerHTML = `<span class="error-message">Status is required.</span>`;
-        return;
-    }
-
-
     // Build the request payload
-    const requestData = { jobTitle }; // always include jobTitle
-
-    if (location) requestData.location = location;
-    if (company) requestData.company = company;
-    if (!isNaN(salary)) requestData.salary = salary;
-    if (!isNaN(desiredSalary)) requestData.desiredSalary = desiredSalary;
-    if (status) requestData.status = status;
+    const requestData = {
+        jobTitle: jobTitle,
+        company: company || "N/A",
+        location: location || "N/A",
+        salary: !isNaN(salary) ? salary : null,
+        desiredSalary: !isNaN(desiredSalary) ? desiredSalary : null,
+        status: status || "PENDING"
+    };
 
 
     fetch('/api/jobs', {
@@ -118,6 +113,7 @@ document.getElementById("jobForm").addEventListener("submit", function(e) {
             document.getElementById('status').value = "PENDING";
 
             loadJobs(); // refresh table
+            if (resultDiv) resultDiv.innerHTML = "";
         })
         .catch(err => {
             resultDiv.innerHTML = `
