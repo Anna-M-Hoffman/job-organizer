@@ -41,6 +41,6 @@
 4. Data is persistent for your device via a generated UUID.
 
 ## Notes
-
+- This application stores a randomly generated anonymous client ID in the browser to associate job entries with a device. No personal data or device identifiers are collected.
 - Each device has its own data set; clearing browser data may reset the UUID and associated jobs.
 - Deployed version on Render requires the backend to be running for live access.
